@@ -45,42 +45,121 @@ typedef struct //腿的信息
 {
 		float Fusion_Velocity;		//融合速度
 		float Predict_Velocity;		//预测速度
-		float W_Velocity;//			角速度
+		float W_Velocity;//			    角速度
 		float LQR_K[2][6];//    	LQR控制器增益矩阵
 		float LQR_X[6];//       	LQR状态向量(哈工程建模)-未来计划更新为上交建模
 		float LQR_Output[2][6];//	LQR输出
     	float Gravity_Compensation;//重力补偿？
-	
-  struct//VMC (virtual model control)与五连杆运动学解算
-  {
-	//1，五连杆的机械参数(物理参数，固定不变)
-		float L1,L2,L3,L4,L5;
-	//2，虚拟腿参数（随时间变化）
-		float L0;          		// 当前虚拟腿长度
-		float L0_dot;       	// 腿长变化率
-		float Last_L0;      	// 上一周期腿长（差分计算）
-		float Target_L0;    	// 目标腿长（遥控设定）
-	//3. 关节角度（输入状态）
-		float Phi1,Phi4;// 		大腿关节角度（电机测量）
-	//4. 计算关节角度（运动学解算）		
-		float Phi2, Phi3;     	// 膝关节角度（解算得到）
-		float Phi0;           	// 虚拟腿角度（计算输出）
-		float Last_Phi0;      	// 上一周期虚拟腿角度
-	//5. 角度变化率：
-		float Phi1_dot, Phi4_dot; // 左右腿大腿关节角速度（由关节电机测量得到）
-		float Phi0_dot;           // 虚拟腿旋转角速度（由Phi0差分或通过雅可比计算得到）
-	//6. 几何关系（运动学计算）	
-		float X_D_X_B, Y_D_Y_B;  // BD向量分量
-		float X_B, Y_B;          // B点坐标
-		float X_D, Y_D;          // D点坐标
-		float X_C, Y_C;          // C点（足端）坐标
-	//7. 运动学解算（足端状态）
-		float X_C_dot, Y_C_dot;  // 足端速度
-	//8. 中间计算变量（优化用）
-		float A0, B0, C0;      // 二次方程系数
-		float LBD_2, LBD;       // BD距离平方/实际值
-		float Sqrt_Cache;       // 平方根缓存
-  }VMC;
+		float Thigh_Comp_Angle;		//大腿摆角补偿
+		float Calf_Comp_Angle;		//小腿摆角补偿
+        //中间变量
+		float M;//（两角之差）腿摆角半差值 逆时针为正，为负值，角度小的一方减去角度大的一方，然后再除以2
+		float N;//（两角之和）腿摆角半和值 逆时针为正，角度大的那一方加上角度小的那一方，然后再除以2
+		float S;//中间变量 公式： S= sqrt(b^2 - a^2 sin^2(M))//M = (θ_1 - θ_2 )/2
+		float S_Radicand;//中间变量 公式： S_Radicand = b^2 - a^2 sin^2(M)//M = (θ_1 - θ_2 )/2
+		float t;//中间变量 公式： t=a*cosM+S //a=AD（给定长度）//b=DC（给定长度）
+		float A;//中间变量 公式： A= (a*t*sinM)/S
+		float a;//中间变量 公式： a=AD（给定长度）//小腿长
+		float b;//中间变量 公式： b=DC（给定长度）//从动短前杆长
+		//大腿连杆末端（J点）速度
+		float X_J_Dot;//轮子X轴速度(J点)
+		float Y_J_Dot;//轮子Y轴速度
+
+//模型物理参数
+        struct {
+		//名词解释
+		//动力短前杆：动力：连杆通过链条连接电机//短：相对长度，与另一根动力杆相比//前：位置靠近底盘前侧
+				 //连杆长度
+				float L_Calf_Link;				//小腿连杆(仿生机器人领域标准术语）动力短前杆长度（AD）,连杆传动
+				float L_Thigh_Link;				//-大腿连杆，连杆直驱--动力长后杆长度（AH）
+				float K;			//大小腿连杆长度比值----前后动力杆长度比率K=AD/AH（小于1）
+				float L_Driven_Short_Front_Link;	//从动短前杆长度（DC）
+			   
+
+				//腿摆角(以水平向右为正方向，逆时针为正，建模时腿部朝上)
+				float Thigh_Angle;			//大腿摆角
+				//float Thigh_Swing_Comp_Angle;		//大腿摆角补偿
+				float Calf_Angle;				//小腿摆角
+				//float Calf_Swing_Comp_Angle;		//小腿摆角补偿
+				float Thigh_Angle_Dot;		//大腿摆角速度
+				float Calf_Angle_Dot;			//小腿摆角速度
+				//力矩
+				float T_Thigh;//左大腿力矩--1号关节电机//右大腿电机力矩----2号关节电机
+				float T_Calf;//左小腿力矩---0号电机//右小腿电机力矩-----3号电机
+
+			}Biased;//偏置并联腿模型参数(BiasedParallel:偏置并联)
+          
+		//单级倒立摆模型参数
+		//腿长
+		float Sip_Leg_Length;							//简化模型腿长（AH）
+		float Sip_Leg_Length_dot;						//简化模型腿长变化率
+		float Last_Sip_Leg_Length;						//上一周期腿长（差分计算）
+		float Target_Sip_Leg_Length;                    //目标 腿长
+		//角度
+		float Sip_Leg_Angle;							//简化模型腿摆角(以水平向右为正方向，逆时针为正，建模时腿部朝上)
+		float Sip_Leg_Angle_dot;						//简化模型腿摆角角速度
+
+//   struct//VMC (virtual model control)与五连杆运动学解算
+//   {
+// // //并联腿建模
+// // 	//1，五连杆的机械参数(物理参数，固定不变)
+// // 		float L1,L2,L3,L4,L5;
+// // 	//2，虚拟腿参数（随时间变化）
+// // 		float L0;          		// 当前虚拟腿长度
+// // 		float L0_dot;       	// 腿长变化率
+// // 		float Last_L0;      	// 上一周期腿长（差分计算）
+// // 		float Target_L0;    	// 目标腿长（遥控设定）
+// // 	//3. 关节角度（输入状态）
+// // 		float Phi1,Phi4;// 		大腿关节角度（电机测量）
+// // 	//4. 计算关节角度（运动学解算）		
+// // 		float Phi2, Phi3;     	// 膝关节角度（解算得到）
+// // 		float Phi0;           	// 虚拟腿角度（计算输出）
+// // 		float Last_Phi0;      	// 上一周期虚拟腿角度
+// // 	//5. 角度变化率：
+// // 		float Phi1_dot, Phi4_dot; // 左右腿大腿关节角速度（由关节电机测量得到）
+// // 		float Phi0_dot;           // 虚拟腿旋转角速度（由Phi0差分或通过雅可比计算得到）
+// // 	//6. 几何关系（运动学计算）	
+// // 		float X_D_X_B, Y_D_Y_B;  // BD向量分量
+// // 		float X_B, Y_B;          // B点坐标
+// // 		float X_D, Y_D;          // D点坐标
+// // 		float X_C, Y_C;          // C点（足端）坐标
+// // 	//7. 运动学解算（足端状态）
+// // 		float X_C_dot, Y_C_dot;  // 足端速度
+// // 	//8. 中间计算变量（优化用）
+// // 		float A0, B0, C0;      // 二次方程系数
+// // 		float LBD_2, LBD;       // BD距离平方/实际值
+// // 		float Sqrt_Cache;       // 平方根缓存
+
+
+// //偏置并联腿建模-----------------------------------------------------------------------------------
+
+
+
+// 	//float AD,DC,K;//AD=AE,DC=CE,K=AD/AH=CE/JH;
+// 	//经计算得出的虚拟连杆的长度
+// 	float L_AC,L_AH;//AC,AH长度
+// 	//读取关节电机角度，根据几何关系计算得出的简化模型一阶倒立摆腿长等等
+// 	float L_0,L_0dot,Last_L_0;
+// 	float Target_L_0;//目标腿长
+// 	//关节角度--电机编码器反馈
+// 	float Phi_1,Phi_2;
+// 	//Phi_0,Last_Phi_0；简化模型的腿摆角(弧度制)
+// 	float Phi_0,Last_Phi_0;
+// 	/*中间变量，简化表达用ϕ:Phi/ψ:Psi
+// 	其中：
+// 	ϕ=(θ_1 - θ_2 )/2
+// 	ψ= (θ_1 + θ_2 )/2
+// 	S= sqrt(b^2 - a^2 sin^2(ϕ))
+// 	t=a*cosϕ+S(其实是AC长度的表达式，AC = t,AH与AC有比例关系：AH = AC/K)
+// 	a=AD（给定长度）
+// 	b=DC（给定长度）
+// 	A= (a*t*sinϕ)/S	
+// 	*/
+// 	float Phi,Psi,S,t,a,b,A;
+// //已知	JRM11[2]= {(-A/AK),0.5}
+// //		JRM12[2]= {( A/AK),0.5}
+
+//   }VMC;
 	
 	struct
     {
@@ -112,7 +191,7 @@ typedef struct //腿的信息
   {
 	float FN;//物理意义​：腿部在垂直方向上施加给地面的力（牛顿)-判断腿部是否接触地面;计算重心分配
 	float P;//压力值--应用场景​：打滑检测（压力突变）地形识别（压力分布
-	bool Flag;//是否处于支撑状态--控制作用​：1.切换控制模式（支撑腿/摆动腿）--2.调整LQR增益
+	bool  Flag;//是否处于支撑状态--控制作用​：1.切换控制模式（支撑腿/摆动腿）--2.调整LQR增益
  
   }Support;
 	
@@ -126,12 +205,12 @@ typedef struct //腿的信息
 						抵抗底盘倾斜（φ）
 						稳定虚拟腿角度（θ）*/
 	float Leg_Coordinate_Tp;/*腿部协调扭矩
-​						物理意义​：协调双腿运动的同步扭矩
-​						​计算来源​：PID控制器（PID_Leg_Coordinate）
-​						控制目标​：
-					   保持双腿对称运动
-					   防止"劈叉"现象
-​						典型值​：±5 N·m（根据双腿角度差）*/
+​						 物理意义​：协调双腿运动的同步扭矩
+​						 ​计算来源​：PID控制器（PID_Leg_Coordinate）
+​						 控制目标​：
+					    保持双腿对称运动
+					    防止"劈叉"现象
+​						 典型值​：±5 N·m（根据双腿角度差）*/
 	float Balance_T;/*平衡力矩
 ​						物理意义​：维持位置平衡的轮毂驱动力矩
 ​						计算来源​：LQR控制器输出
@@ -192,6 +271,10 @@ x˙=Fusion→状态4输入
    	 float T1;
 	 float T2;
 	 int16_t Current;
+
+	 //偏腿
+	 float T_Thigh;//大腿力矩
+	 float T_Calf;//小腿力矩
 	}SendValue;
 	
 	float T;
@@ -226,8 +309,8 @@ Gravity_Compensation	重力补偿	抵消自重*/
 typedef struct{
     
 	
-	Control_Mode_e   Control_Mode;			// 当前控制模式
-	Chassis_Situation_e  Chassis_Situation; // 底盘状态
+	  Control_Mode_e   Control_Mode;			// 当前控制模式
+	  Chassis_Situation_e  Chassis_Situation; // 底盘状态
     Chassis_Mode_e Chassis_Mode;			// 底盘运动模式
     Leg_Length_Mode_e  Leg_Length_Mode;		// 腿部长度模式
   	float VDC;								// 电压值
@@ -311,7 +394,7 @@ typedef struct{
 //左右腿信息	
   	Leg_Info_Typedef L_Leg_Info;
 
-	Leg_Info_Typedef R_Leg_Info;
+	  Leg_Info_Typedef R_Leg_Info;
 	
 	float Yaw_Err;			//当前偏航角与目标偏航角的差值-转向控制的主要输入
 							//决定转向力矩大小
