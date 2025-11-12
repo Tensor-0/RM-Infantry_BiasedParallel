@@ -50,6 +50,7 @@
  */
 #define RadiansToDegrees 57.295779513f
 
+#define RemoteToDegrees   0.272727272f//(180/600)--2025.11.11添加
 /**
  * @brief degrees system rotation radian system , PI/180.f
  */

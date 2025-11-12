@@ -3,7 +3,7 @@
 <title>Static Call Graph - [COD_H7_Template\COD_H7_Template.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image COD_H7_Template\COD_H7_Template.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Nov 10 21:13:01 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Nov 12 18:46:58 2025
 <BR><P>
 <H3>Maximum Stack Usage =        692 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1150,8 +1150,8 @@ Global Symbols
 <P><STRONG><a name="[1a]"></a>BusFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(.text.BusFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h723xx.o(RESET)
 </UL>
-<P><STRONG><a name="[b8]"></a>CAN_Task</STRONG> (Thumb, 784 bytes, Stack size 96 bytes, can_task.o(.text.CAN_Task))
-<BR><BR>[Stack]<UL><LI>Max Depth = 444 + Unknown Stack Size
+<P><STRONG><a name="[b8]"></a>CAN_Task</STRONG> (Thumb, 504 bytes, Stack size 64 bytes, can_task.o(.text.CAN_Task))
+<BR><BR>[Stack]<UL><LI>Max Depth = 412 + Unknown Stack Size
 <LI>Call Chain = CAN_Task &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; SEGGER_SYSVIEW_OnTaskStartReady &rArr; _SendPacket &rArr; _HandleIncomingPacket &rArr; SEGGER_SYSVIEW_Start &rArr;  _SendPacket (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USER_FDCAN_AddMessageToTxFifoQ
@@ -1167,18 +1167,18 @@ Global Symbols
 <LI>Call Chain = Control_Task &rArr; LQR_K_Update &rArr; __hardfp_powf &rArr; __set_errno
 </UL>
 <BR>[Calls]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Joint_Tourgue_Calculate
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Comprehensive_F_Calculate
-<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_T_Tp_Calculate
-<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_X_Update
-<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Target_Update
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
-<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_K_Update
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
-<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Joint_Angle_Offset
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mode_Update
+<LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Comprehensive_F_Calculate
+<LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_T_Tp_Calculate
+<LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_X_Update
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Target_Update
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_K_Update
+<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
+<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Joint_Angle_Offset
+<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mode_Update
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_Low_Voltage_Beep
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Init
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Init
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelayUntil
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osKernelSysTick
 </UL>
@@ -3049,14 +3049,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[250]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LowPassFilter1p_Update
 <LI><a href="#[24f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_ErrorHandle
 </UL>
-<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Comprehensive_F_Calculate
-<LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_Temp_Control
+<BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_Temp_Control
 </UL>
 
-<P><STRONG><a name="[126]"></a>PID_Init</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, pid.o(.text.PID_Init))
+<P><STRONG><a name="[125]"></a>PID_Init</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, pid.o(.text.PID_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PID_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Init
+<BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Init
 <LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_Task_Init
 </UL>
 
@@ -4284,9 +4283,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[24c]"></a>arm_cos_f32</STRONG> (Thumb, 144 bytes, Stack size 0 bytes, arm_cos_f32.o(.text.arm_cos_f32))
-<BR><BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
+<BR><BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
+<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
 </UL>
 
 <P><STRONG><a name="[221]"></a>arm_mat_add_f32</STRONG> (Thumb, 190 bytes, Stack size 16 bytes, arm_mat_add_f32.o(.text.arm_mat_add_f32))
@@ -4343,15 +4342,15 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[24d]"></a>arm_sin_f32</STRONG> (Thumb, 140 bytes, Stack size 0 bytes, arm_sin_f32.o(.text.arm_sin_f32))
-<BR><BR>[Called By]<UL><LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
-<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
+<BR><BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Measure_F_Tp_Calculate
+<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
+<LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
 </UL>
 
 <P><STRONG><a name="[285]"></a>f_Ramp_Calc</STRONG> (Thumb, 178 bytes, Stack size 20 bytes, ramp.o(.text.f_Ramp_Calc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = f_Ramp_Calc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Target_Update
+<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Target_Update
 </UL>
 
 <P><STRONG><a name="[ca]"></a>main</STRONG> (Thumb, 354 bytes, Stack size 24 bytes, main.o(.text.main))
@@ -4735,8 +4734,8 @@ Global Symbols
 <LI><a href="#[2eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
-<LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_K_Update
+<BR>[Called By]<UL><LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Update
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LQR_K_Update
 </UL>
 
 <P><STRONG><a name="[32d]"></a>__mathlib_powf</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, powf.o(i.__hardfp_powf), UNUSED)
@@ -4746,7 +4745,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
-<BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
+<BR>[Called By]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VMC_Calculate
 </UL>
 
 <P><STRONG><a name="[2ef]"></a>__mathlib_flt_divzero</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_divzero))
@@ -4804,7 +4803,7 @@ Local Symbols
 <LI>Call Chain = INS_Task_Init &rArr; QuaternionEKF_Init &rArr; Kalman_Filter_Init &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QuaternionEKF_Init
-<LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Init
 <LI><a href="#[219]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LowPassFilter2p_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_Task
@@ -4819,10 +4818,10 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_Task
 </UL>
 
-<P><STRONG><a name="[125]"></a>Control_Init</STRONG> (Thumb, 114 bytes, Stack size 32 bytes, control_task.o(.text.Control_Init))
+<P><STRONG><a name="[124]"></a>Control_Init</STRONG> (Thumb, 114 bytes, Stack size 32 bytes, control_task.o(.text.Control_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = Control_Init &rArr; PID_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Init
+<BR>[Calls]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
@@ -4835,19 +4834,19 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[127]"></a>Mode_Update</STRONG> (Thumb, 372 bytes, Stack size 8 bytes, control_task.o(.text.Mode_Update))
+<P><STRONG><a name="[126]"></a>Mode_Update</STRONG> (Thumb, 372 bytes, Stack size 8 bytes, control_task.o(.text.Mode_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Mode_Update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[128]"></a>Joint_Angle_Offset</STRONG> (Thumb, 124 bytes, Stack size 4 bytes, control_task.o(.text.Joint_Angle_Offset))
+<P><STRONG><a name="[127]"></a>Joint_Angle_Offset</STRONG> (Thumb, 134 bytes, Stack size 4 bytes, control_task.o(.text.Joint_Angle_Offset))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Joint_Angle_Offset
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[129]"></a>VMC_Calculate</STRONG> (Thumb, 1184 bytes, Stack size 144 bytes, control_task.o(.text.VMC_Calculate))
+<P><STRONG><a name="[128]"></a>VMC_Calculate</STRONG> (Thumb, 1184 bytes, Stack size 144 bytes, control_task.o(.text.VMC_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = VMC_Calculate &rArr; __hardfp_sqrtf &rArr; __set_errno
 </UL>
 <BR>[Calls]<UL><LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_cos_f32
@@ -4857,7 +4856,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12a]"></a>LQR_K_Update</STRONG> (Thumb, 2530 bytes, Stack size 368 bytes, control_task.o(.text.LQR_K_Update))
+<P><STRONG><a name="[129]"></a>LQR_K_Update</STRONG> (Thumb, 2530 bytes, Stack size 368 bytes, control_task.o(.text.LQR_K_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 408<LI>Call Chain = LQR_K_Update &rArr; __hardfp_powf &rArr; __set_errno
 </UL>
 <BR>[Calls]<UL><LI><a href="#[22a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_powf
@@ -4865,7 +4864,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12b]"></a>Measure_Update</STRONG> (Thumb, 1136 bytes, Stack size 112 bytes, control_task.o(.text.Measure_Update))
+<P><STRONG><a name="[12a]"></a>Measure_Update</STRONG> (Thumb, 1136 bytes, Stack size 112 bytes, control_task.o(.text.Measure_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Measure_Update &rArr; __hardfp_powf &rArr; __set_errno
 </UL>
 <BR>[Calls]<UL><LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_cos_f32
@@ -4875,7 +4874,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12c]"></a>Target_Update</STRONG> (Thumb, 324 bytes, Stack size 16 bytes, control_task.o(.text.Target_Update))
+<P><STRONG><a name="[12b]"></a>Target_Update</STRONG> (Thumb, 324 bytes, Stack size 16 bytes, control_task.o(.text.Target_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Target_Update &rArr; f_Ramp_Calc
 </UL>
 <BR>[Calls]<UL><LI><a href="#[285]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_Ramp_Calc
@@ -4883,7 +4882,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12d]"></a>VMC_Measure_F_Tp_Calculate</STRONG> (Thumb, 388 bytes, Stack size 40 bytes, control_task.o(.text.VMC_Measure_F_Tp_Calculate))
+<P><STRONG><a name="[12c]"></a>VMC_Measure_F_Tp_Calculate</STRONG> (Thumb, 388 bytes, Stack size 40 bytes, control_task.o(.text.VMC_Measure_F_Tp_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = VMC_Measure_F_Tp_Calculate
 </UL>
 <BR>[Calls]<UL><LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_cos_f32
@@ -4892,27 +4891,25 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12e]"></a>LQR_X_Update</STRONG> (Thumb, 224 bytes, Stack size 4 bytes, control_task.o(.text.LQR_X_Update))
+<P><STRONG><a name="[12d]"></a>LQR_X_Update</STRONG> (Thumb, 224 bytes, Stack size 4 bytes, control_task.o(.text.LQR_X_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = LQR_X_Update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[12f]"></a>LQR_T_Tp_Calculate</STRONG> (Thumb, 762 bytes, Stack size 8 bytes, control_task.o(.text.LQR_T_Tp_Calculate))
+<P><STRONG><a name="[12e]"></a>LQR_T_Tp_Calculate</STRONG> (Thumb, 762 bytes, Stack size 8 bytes, control_task.o(.text.LQR_T_Tp_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LQR_T_Tp_Calculate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[124]"></a>Comprehensive_F_Calculate</STRONG> (Thumb, 688 bytes, Stack size 32 bytes, control_task.o(.text.Comprehensive_F_Calculate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = Comprehensive_F_Calculate &rArr; PID_Calculate &rArr; PID_ErrorHandle &rArr; __ARM_isinff
-</UL>
-<BR>[Calls]<UL><LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
+<P><STRONG><a name="[12f]"></a>Comprehensive_F_Calculate</STRONG> (Thumb, 116 bytes, Stack size 4 bytes, control_task.o(.text.Comprehensive_F_Calculate))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Comprehensive_F_Calculate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task
 </UL>
 
-<P><STRONG><a name="[130]"></a>Joint_Tourgue_Calculate</STRONG> (Thumb, 668 bytes, Stack size 4 bytes, control_task.o(.text.Joint_Tourgue_Calculate))
+<P><STRONG><a name="[130]"></a>Joint_Tourgue_Calculate</STRONG> (Thumb, 660 bytes, Stack size 4 bytes, control_task.o(.text.Joint_Tourgue_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Joint_Tourgue_Calculate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Task

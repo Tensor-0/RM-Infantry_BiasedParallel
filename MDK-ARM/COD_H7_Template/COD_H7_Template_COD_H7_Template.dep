@@ -30,7 +30,7 @@ I (..\Components\Device\Inc\bmi088.h)(0x67A800B2)
 I (..\Components\Device\Inc\bmi088_reg.h)(0x67A800B2)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (..\Components\Algorithm\Inc\lpf.h)(0x67A800B2)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
@@ -86,7 +86,7 @@ I (..\Middlewares\ST\ARM\DSP\Inc\arm_math.h)(0x67D87AC8)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\float.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\limits.h)(0x63884908)
 I (..\BSP\Inc\bsp_pwm.h)(0x67A800B2)
-F (..\Application\Task\Src\Control_Task.c)(0x6911E4DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/control_task.o -MD)
+F (..\Application\Task\Src\Control_Task.c)(0x691465A0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/control_task.o -MD)
 I (..\Application\Task\Inc\Control_Task.h)(0x690ED884)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
@@ -169,14 +169,14 @@ I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdio.h)(0x63884908)
 I (..\Components\Device\Inc\Image_Transmission.h)(0x6804A59A)
 I (..\Components\Algorithm\Inc\Ramp.h)(0x67A800B2)
 I (..\Components\Controller\Inc\PID.h)(0x67A800B2)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (..\Components\Algorithm\Inc\lpf.h)(0x67A800B2)
 I (..\Components\Device\Inc\Motor.h)(0x6808ED5E)
 I (..\BSP\Inc\bsp_can.h)(0x67A800B2)
 I (..\Middlewares\ST\ARM\DSP\Inc\arm_math.h)(0x67D87AC8)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\float.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\limits.h)(0x63884908)
-F (..\Application\Task\Src\CAN_Task.c)(0x6911E294)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/can_task.o -MD)
+F (..\Application\Task\Src\CAN_Task.c)(0x69145922)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/can_task.o -MD)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.h)(0x680B479A)
 I (..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h)(0x680B479A)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stddef.h)(0x63884908)
@@ -206,7 +206,7 @@ I (..\Application\Task\Inc\Control_Task.h)(0x690ED884)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (..\Application\Task\Inc\INS_Task.h)(0x67A800B2)
 I (..\Components\Device\Inc\Motor.h)(0x6808ED5E)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
@@ -291,10 +291,10 @@ I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdio.h)(0x63884908)
 I (..\BSP\Inc\bsp_gpio.h)(0x67A800B2)
-F (..\Application\Task\Inc\Config.h)(0x67A800B2)()
+F (..\Application\Task\Inc\Config.h)(0x69142E1D)()
 F (..\Components\Device\Src\Motor.c)(0x6891FCD3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/motor.o -MD)
 I (..\Components\Device\Inc\Motor.h)(0x6808ED5E)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
@@ -580,7 +580,7 @@ I (..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_ll_usb.h)(0x680B47E2)
 I (..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h)(0x680B47E2)
 I (..\BSP\Inc\bsp_can.h)(0x67A800B2)
 I (..\Components\Device\Inc\Motor.h)(0x6808ED5E)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
@@ -971,7 +971,7 @@ I (..\Drivers\CMSIS\Include\mpu_armv7.h)(0x680B479C)
 I (..\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x680B47E2)
 F (..\Components\Controller\Src\PID.c)(0x680A1BBA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/pid.o -MD)
 I (..\Components\Controller\Inc\PID.h)(0x67A800B2)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
@@ -990,7 +990,7 @@ I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\float.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\limits.h)(0x63884908)
-I (..\Application\Task\Inc\Config.h)(0x67A800B2)
+I (..\Application\Task\Inc\Config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
 F (..\Components\Algorithm\Src\Quaternion.c)(0x67A800B2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/quaternion.o -MD)
@@ -1007,11 +1007,11 @@ I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\float.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\limits.h)(0x63884908)
-I (..\Application\Task\Inc\Config.h)(0x67A800B2)
+I (..\Application\Task\Inc\Config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
 F (..\Components\Algorithm\Src\LPF.c)(0x67A800B2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/lpf.o -MD)
 I (..\Components\Algorithm\Inc\LPF.h)(0x67A800B2)
-I (..\Application\Task\Inc\config.h)(0x67A800B2)
+I (..\Application\Task\Inc\config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
@@ -1026,7 +1026,7 @@ I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\string.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\math.h)(0x63884908)
 F (..\Components\Algorithm\Src\RLS.c)(0x67A800B2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Application/Task/Inc -I ../Components/Device/Inc -I ../Components/Controller/Inc -I ../Components/Algorithm/Inc -I ../BSP/Inc -I ../SystemView/SEGGER/Syscalls -I ../SystemView/Sample/FreeRTOSV10 -I ../SystemView/Sample/FreeRTOSV10/Patch -I ../SystemView/Config -I ../SystemView/SEGGER -I ../Middlewares/ST/ARM/DSP/Inc -I ../USB_DEVICE/App -I ../USB_DEVICE/Target -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc-I./RTE/_COD_H7_Template-IC:/CODsoftware/Keil/ARM/CMSIS/5.9.0/CMSIS/Core/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx -DARM_MATH_CM7 -D__FPU_PRESENT="1U" -DARM_MATH_CHECK -DUSE_PWR_LDO_SUPPLY-o cod_h7_template/rls.o -MD)
 I (..\Components\Algorithm\Inc\RLS.h)(0x67A800B2)
-I (..\Application\Task\Inc\Config.h)(0x67A800B2)
+I (..\Application\Task\Inc\Config.h)(0x69142E1D)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\CODsoftware\Keil\ARM\ARMCLANG\include\stdlib.h)(0x63884908)

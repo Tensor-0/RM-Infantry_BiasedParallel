@@ -30,55 +30,63 @@
 		
 	 //当遥控器没拨到关机档时	
 	if(remote_ctrl.rc.s[1] == 3 || remote_ctrl.rc.s[1] == 1){
-		//当关节电机没转到安全位置时
-	 	if(Control_Info.Init.Joint_Init.IF_Joint_Init == 0){
-			//让关节电机位置归零
-//	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,10.f,1.f,0);
-//	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,10.f,1.f,0);
-//       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,10.f,1.f,0);	
-//       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,10.f,1.f,0);
-//			
-			//让关节电机位置归零-----位置控制测试用，KP给定2N/r，KD给1N*s/r其余全部给0
-	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,10.f,1.f,0);
-	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,10.f,1.f,0);
+// 		//测试转换器
+// 		//当关节电机没转到安全位置时
+// 	 	if(Control_Info.Init.Joint_Init.IF_Joint_Init == 0){
+// 			//让关节电机位置归零
+// //	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,10.f,1.f,0);
+// //	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,10.f,1.f,0);
+// //       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,10.f,1.f,0);	
+// //       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,10.f,1.f,0);
+// //			
+// 			//让关节电机位置归零-----位置控制测试用，KP给定2N/r，KD给1N*s/r其余全部给0
+// 	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,10.f,1.f,0);
+// 	   		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,10.f,1.f,0);
 			
-       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,10.f,1.f,0);	
-       		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,10.f,1.f,0);
+//        		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,10.f,1.f,0);	
+//        		   DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,10.f,1.f,0);
 						
 			
 			
-		 	//让轮子失能
-			 FDCAN3_TxFrame.Header.Identifier = 0x200;					
-		 	 FDCAN3_TxFrame.Data[0] = 0;
-		  FDCAN3_TxFrame.Data[1] = 0;
-		 	 FDCAN3_TxFrame.Data[2] = 0;
-		 	 FDCAN3_TxFrame.Data[3] = 0;
-		 	 FDCAN3_TxFrame.Data[4] = 0;
-		 	 FDCAN3_TxFrame.Data[5] = 0;
-		 	 USER_FDCAN_AddMessageToTxFifoQ(&FDCAN3_TxFrame);
-	 //当整车初始化完成时
-	 }else{
-		//开始给电机发送数据
-					//让关节电机位置归零------测试用
-//	   		    DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,16.f,1.f,0);
-//	   		    DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,16.f,1.f,0);
-       		  //DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,16.f,1.f,0);	
-      		  //DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,16.f,1.f,0);	
-//====================================================================================================================
-		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Thigh);
-	      DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Calf);
-          DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Thigh);	
-          DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Calf);	
-		  FDCAN3_TxFrame.Header.Identifier = 0x200;					
-		  FDCAN3_TxFrame.Data[0] = (uint8_t)(Control_Info.L_Leg_Info.SendValue.Current>>8);
-		  FDCAN3_TxFrame.Data[1] = (uint8_t)(Control_Info.L_Leg_Info.SendValue.Current);
-		  FDCAN3_TxFrame.Data[2] = (uint8_t)(Control_Info.R_Leg_Info.SendValue.Current>>8);
-		  FDCAN3_TxFrame.Data[3] = (uint8_t)(Control_Info.R_Leg_Info.SendValue.Current);
-		  FDCAN3_TxFrame.Data[4] = (uint8_t)(0)>>8;//预留
-		  FDCAN3_TxFrame.Data[5] = (uint8_t)(0);//预留
-		  USER_FDCAN_AddMessageToTxFifoQ(&FDCAN3_TxFrame);
-	 }
-		 
+// 		 	//让轮子失能
+// 			 FDCAN3_TxFrame.Header.Identifier = 0x200;					
+// 		 	 FDCAN3_TxFrame.Data[0] = 0;
+// 		     FDCAN3_TxFrame.Data[1] = 0;
+// 		 	 FDCAN3_TxFrame.Data[2] = 0;
+// 		 	 FDCAN3_TxFrame.Data[3] = 0;
+// 		 	 FDCAN3_TxFrame.Data[4] = 0;
+// 		 	 FDCAN3_TxFrame.Data[5] = 0;
+// 		 	 USER_FDCAN_AddMessageToTxFifoQ(&FDCAN3_TxFrame);
+// 	 //当整车初始化完成时
+// 	 }else{
+// 		//开始给电机发送数据
+// 					//让关节电机位置归零------测试用
+// //	   		    DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,16.f,1.f,0);
+// //	   		    DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,16.f,1.f,0);
+//        		  //DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,16.f,1.f,0);	
+//       		  //DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,16.f,1.f,0);	
+// //====================================================================================================================
+// 		  DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Thigh);
+// 	      DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Calf);
+//           DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Thigh);	
+//           DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Calf);	
+// 		  FDCAN3_TxFrame.Header.Identifier = 0x200;					
+// 		  FDCAN3_TxFrame.Data[0] = (uint8_t)(Control_Info.L_Leg_Info.SendValue.Current>>8);
+// 		  FDCAN3_TxFrame.Data[1] = (uint8_t)(Control_Info.L_Leg_Info.SendValue.Current);
+// 		  FDCAN3_TxFrame.Data[2] = (uint8_t)(Control_Info.R_Leg_Info.SendValue.Current>>8);
+// 		  FDCAN3_TxFrame.Data[3] = (uint8_t)(Control_Info.R_Leg_Info.SendValue.Current);
+// 		  FDCAN3_TxFrame.Data[4] = (uint8_t)(0)>>8;//预留
+// 		  FDCAN3_TxFrame.Data[5] = (uint8_t)(0);//预留
+// 		  USER_FDCAN_AddMessageToTxFifoQ(&FDCAN3_TxFrame);
+// 	 }
+	
+
+
+//测试转换器
+ 		       DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[0],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Thigh);
+ 	         DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[1],0,0,0,0,Control_Info.L_Leg_Info.SendValue.T_Calf);
+           DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[2],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Thigh);	
+           DM_Motor_CAN_TxMessage(&FDCAN2_TxFrame,&DM_8009_Motor[3],0,0,0,0,Control_Info.R_Leg_Info.SendValue.T_Calf);	
 	//当要关机时	 
 	}else{	
 		//全部断电

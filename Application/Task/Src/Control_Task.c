@@ -113,7 +113,19 @@ Control_Info_Typedef Control_Info ={
 
 
 
-//偏置并联
+//右腿
+.R_Leg_Info = {
+	.Thigh_Comp_Angle = 0.0f,//大腿摆角补偿
+	.Calf_Comp_Angle  = 0.0f,//小腿摆角补偿
+	.Biased = {
+		.L_Thigh_Link = 0.215f,//大腿连杆，连杆直驱--动力长后杆长度（AH）
+		.L_Calf_Link  = 0.098f,//小腿连杆(仿生机器人领域标准术语）动力短前杆长度（AD）,连杆传动
+		.K = 0.4558139f,//连杆长度比K=AD/AH
+
+		
+	},//偏置并联
+
+},
 
 
 
@@ -339,7 +351,7 @@ static void Joint_Angle_Offset(Control_Info_Typedef *Control_Info){
 //测试用：假设，当腿完全收缩时-也就是到达最低机械限位，时，大腿和小腿连杆可以张到180度（实际是180.03度）
 
     // //左小腿摆角与0号关节电机的映射(摆角=-电机角度)
-	 Control_Info->L_Leg_Info.Biased.Calf_Angle 		 = DM_8009_Motor[0].Data.Position;
+	 Control_Info->L_Leg_Info.Biased.Calf_Angle 		 = - DM_8009_Motor[0].Data.Position;
 	// //左大腿摆角与1号关节电机的映射（摆角=电机角度）
 	 Control_Info->L_Leg_Info.Biased.Thigh_Angle 		 =   DM_8009_Motor[1].Data.Position;
 	//角速度
@@ -364,7 +376,7 @@ static void Joint_Angle_Offset(Control_Info_Typedef *Control_Info){
 	//测试用：假设，当腿完全收缩时-也就是到达最低机械限位，时，大腿和小腿连杆可以张到180度（实际是180.03度）
 
 	// //右大腿摆角和2号关节电机的映射(同左腿)
-	 Control_Info->R_Leg_Info.Biased.Thigh_Angle 		 =  DM_8009_Motor[2].Data.Position;
+	 Control_Info->R_Leg_Info.Biased.Thigh_Angle 		 = - DM_8009_Motor[2].Data.Position;
 	// //右小腿摆角和3号关节电机的映射
 	 Control_Info->R_Leg_Info.Biased.Calf_Angle  		 =   DM_8009_Motor[3].Data.Position;
 	//角速度
@@ -791,7 +803,7 @@ Control_Info->L_Leg_Info.Measure.Chassis_Velocity = Control_Info->L_Leg_Info.Vel
 
 	}else{
 	    // 重置位置（速度控制模式下位置环不工作）
-		Control_Info->L_Leg_Info.Measure.Chassis_Position = 0 ;
+		  Control_Info->L_Leg_Info.Measure.Chassis_Position = 0 ;
 	
     	Control_Info->R_Leg_Info.Measure.Chassis_Position = 0 ; 
 	
@@ -818,11 +830,11 @@ g × sin(Φ)：重力分量在底盘平面投影
  if(Control_Info->Chassis_Situation == CHASSIS_WEAK){
 // 重置所有状态量为0 
    		Control_Info->L_Leg_Info.Measure.Phi = 0;
-	 	Control_Info->L_Leg_Info.Measure.Phi_dot = 0;
+	 	  Control_Info->L_Leg_Info.Measure.Phi_dot = 0;
 	  	Control_Info->L_Leg_Info.Measure.Chassis_Position = 0;
 	  	Control_Info->L_Leg_Info.Measure.Chassis_Velocity = 0;
-	 	Control_Info->L_Leg_Info.Measure.Theta = 0;
-	 	Control_Info->L_Leg_Info.Measure.Theta_dot = 0;
+	 	  Control_Info->L_Leg_Info.Measure.Theta = 0;
+	 	  Control_Info->L_Leg_Info.Measure.Theta_dot = 0;
  
 	  	Control_Info->R_Leg_Info.Measure.Phi = 0;
 	  	Control_Info->R_Leg_Info.Measure.Phi_dot = 0;
@@ -1134,91 +1146,134 @@ static void LQR_T_Tp_Calculate(Control_Info_Typedef *Control_Info){
 
 }	
 	
+//另类目标控制，只不过这里的控制是写死的
+//各种功能是以打补丁的方式添加到对关节电机，驱动轮电机的控制中
+
 static void Comprehensive_F_Calculate(Control_Info_Typedef *Control_Info){
+// //测试(底盘专用)
+// /*
 
-	
-	Control_Info->Yaw_Err = 0.f - DM_Yaw_Motor.Data.Position * RadiansToDegrees ;
-	
-	if (Control_Info->Yaw_Err >= 180.f) Control_Info->Yaw_Err -= 360.f;
-	else if (Control_Info->Yaw_Err <= -180.f) Control_Info->Yaw_Err += 360.f;
+// 主要是修改Yaw_Err的来源
+// 将遥控器的摇杆值（范围：-660到660）代替DM_Yaw_Motor.Data.Position*/
+// Control_Info->Yaw_Err = 0.f - remote_ctrl.rc.ch[2] * RemoteToDegrees;
 
-  PID_Calculate(&PID_Yaw[0], 0, Control_Info->Yaw_Err);
-	PID_Calculate(&PID_Yaw[1],PID_Yaw[0].Output,INS_Info.Yaw_Gyro);
+// 	//计算偏航角误差 Yaw_Err，通过将电机位置从弧度转换为角度后取负值
+// 	//Control_Info->Yaw_Err = 0.f - DM_Yaw_Motor.Data.Position * RadiansToDegrees ;
+// 	//将偏航角误差限制在[-180~180]度
+// 	if (Control_Info->Yaw_Err >= 180.f) 		Control_Info->Yaw_Err -= 360.f;
+// 	else if (Control_Info->Yaw_Err <= -180.f)   Control_Info->Yaw_Err += 360.f;
+
+// //yaw轴串级PID控制
+// //上级：目标yaw轴角度偏差为0，输入Control_Info->Yaw_Err，输出：PID_Yaw[0].Output
+// 	PID_Calculate(&PID_Yaw[0], 0, Control_Info->Yaw_Err);
+// //下级：目标yaw轴角速度为0，输入INS_Info.Yaw_Gyro，输出：PID_Yaw[1].Output
+// 	PID_Calculate(&PID_Yaw[1],PID_Yaw[0].Output,INS_Info.Yaw_Gyro);
+
+
+//  // 更新PID_Leg_Coordinate，设置目标值为左脚和右脚的Theta差值，反馈值为左脚和右脚的Theta差值
  
-  PID_Calculate(&PID_Leg_Coordinate, 0, Control_Info->L_Leg_Info.Measure.Theta - Control_Info->R_Leg_Info.Measure.Theta);
-
-	Control_Info->L_Leg_Info.Moment.Leg_Coordinate_Tp = -PID_Leg_Coordinate.Output;
-	Control_Info->R_Leg_Info.Moment.Leg_Coordinate_Tp = -PID_Leg_Coordinate.Output;
+//  // 防劈叉PID控制
+//  // 更新PID_Leg_Coordinate，设置目标值为左脚和右脚的Theta差值，反馈值为左脚和右脚的Theta差值
+//     PID_Calculate(&PID_Leg_Coordinate, 0, Control_Info->L_Leg_Info.Measure.Theta - Control_Info->R_Leg_Info.Measure.Theta);
+// //影响简化腿摆角力矩Tp
+// //将腿部坐标调节力矩分配给左右腿，方向相反以实现平衡
+// 	Control_Info->L_Leg_Info.Moment.Leg_Coordinate_Tp = -PID_Leg_Coordinate.Output;
+// 	Control_Info->R_Leg_Info.Moment.Leg_Coordinate_Tp = -PID_Leg_Coordinate.Output;
+// //横滚控制，在左右腿处于不同高度时，保持机体水平方向平衡	
+// //基于滚转角度计算左右腿的滚动补偿力，增加稳定性。
+// 	Control_Info->L_Leg_Info.Moment.Roll_F = -(INS_Info.Roll_Angle + 0.4f) * 50.f;
+// 	Control_Info->R_Leg_Info.Moment.Roll_F =  (INS_Info.Roll_Angle + 0.4f) * 50.f;
 	
-	Control_Info->L_Leg_Info.Moment.Roll_F = -(INS_Info.Roll_Angle + 0.4f) * 50.f;
-	Control_Info->R_Leg_Info.Moment.Roll_F =  (INS_Info.Roll_Angle + 0.4f) * 50.f;
-	
-	
-	Control_Info->L_Leg_Info.Moment.Turn_T =  PID_Yaw[1].Output;
-	Control_Info->R_Leg_Info.Moment.Turn_T = -PID_Yaw[1].Output;
-	
-  Control_Info->L_Leg_Info.Moment.Leg_Length_F =  PID_Calculate(&PID_Leg_length_F[0],Control_Info->L_Leg_Info.Target_Sip_Leg_Length,Control_Info->L_Leg_Info.Sip_Leg_Length);
-  Control_Info->R_Leg_Info.Moment.Leg_Length_F =  PID_Calculate(&PID_Leg_length_F[1],Control_Info->R_Leg_Info.Target_Sip_Leg_Length,Control_Info->R_Leg_Info.Sip_Leg_Length);
+// //转向控制	
+// //将偏航转向力矩分别施加到左右腿上，方向相反实现转向。
+// 	Control_Info->L_Leg_Info.Moment.Turn_T =  PID_Yaw[1].Output;
+// 	Control_Info->R_Leg_Info.Moment.Turn_T = -PID_Yaw[1].Output;
+// //腿长控制	
+// 	//分别对左右腿长度进行 PID 控制，使腿长达到目标值。
+// 	//输入：目标腿长（sip_leg_length）和测量腿长（sip_leg_length）
+// 	//输出：PID_Leg_length_F[0].Output和PID_Leg_length_F[1].Output
+//   Control_Info->L_Leg_Info.Moment.Leg_Length_F =  PID_Calculate(&PID_Leg_length_F[0],Control_Info->L_Leg_Info.Target_Sip_Leg_Length,Control_Info->L_Leg_Info.Sip_Leg_Length);
+//   Control_Info->R_Leg_Info.Moment.Leg_Length_F =  PID_Calculate(&PID_Leg_length_F[1],Control_Info->R_Leg_Info.Target_Sip_Leg_Length,Control_Info->R_Leg_Info.Sip_Leg_Length);
 
+// //设置初始重力补偿值为 100。
+// Control_Info->R_Leg_Info.Gravity_Compensation = 100.f;
+// Control_Info->L_Leg_Info.Gravity_Compensation = 100.f;
 
-		   Control_Info->R_Leg_Info.Gravity_Compensation = 100.f;
-	     Control_Info->L_Leg_Info.Gravity_Compensation = 100.f;
-
-
-	if(Control_Info->L_Leg_Info.Support.Flag == 1){
+// //如果左腿处于支撑状态，则取消其滚动补偿，并提高重力补偿至 140。
+// 	if(Control_Info->L_Leg_Info.Support.Flag == 1){
 	   
-		Control_Info->L_Leg_Info.Moment.Roll_F = 0;
-	  Control_Info->L_Leg_Info.Gravity_Compensation = 140.f;
-	}
+// 		Control_Info->L_Leg_Info.Moment.Roll_F = 0;
+// 	  Control_Info->L_Leg_Info.Gravity_Compensation = 140.f;
+// 	}
+// 	//同理处理右腿支撑情况。
+// 	if(Control_Info->R_Leg_Info.Support.Flag == 1){
 	
-	if(Control_Info->R_Leg_Info.Support.Flag == 1){
-	
-		Control_Info->R_Leg_Info.Moment.Roll_F = 0;
-		Control_Info->R_Leg_Info.Gravity_Compensation = 140.f;
+// 		Control_Info->R_Leg_Info.Moment.Roll_F = 0;
+// 		Control_Info->R_Leg_Info.Gravity_Compensation = 140.f;
 
 	
-	}
+// 	}
 	
 	
+// 	//综合各部分力矩得到左右腿总的驱动力。
+// 	//公式：F =  腿长补偿力（L_Leg_Info.Moment.Leg_Length_F）
+// 	//         + 横滚补偿力（L_Leg_Info.Moment.Roll_F ）
+// 	//         + 重力补偿（L_Leg_Info.Gravity_Compensation;）
+// 	//分析：已知，重力的方向垂直地面向下，且Gravity_Compensation的值为正，故综合力的方向向下，
+// 	//同重力方向
+// 	Control_Info->L_Leg_Info.F = Control_Info->L_Leg_Info.Moment.Leg_Length_F  + Control_Info->L_Leg_Info.Moment.Roll_F  +  Control_Info->L_Leg_Info.Gravity_Compensation;  
+// 	Control_Info->R_Leg_Info.F = Control_Info->R_Leg_Info.Moment.Leg_Length_F  + Control_Info->R_Leg_Info.Moment.Roll_F  +  Control_Info->R_Leg_Info.Gravity_Compensation;
 	
-	Control_Info->L_Leg_Info.F = Control_Info->L_Leg_Info.Moment.Leg_Length_F  + Control_Info->L_Leg_Info.Moment.Roll_F  +  Control_Info->L_Leg_Info.Gravity_Compensation;  
-	Control_Info->R_Leg_Info.F = Control_Info->R_Leg_Info.Moment.Leg_Length_F  + Control_Info->R_Leg_Info.Moment.Roll_F  +  Control_Info->R_Leg_Info.Gravity_Compensation;
-	
-	
-	Control_Info->L_Leg_Info.T = (Control_Info->L_Leg_Info.Moment.Balance_T  );//+ Control_Info->L_Leg_Info.Moment.Turn_T) ;
-	Control_Info->R_Leg_Info.T = (Control_Info->R_Leg_Info.Moment.Balance_T  );//+ Control_Info->R_Leg_Info.Moment.Turn_T) ;
+// 	//驱动轮的转矩
+// 	//公式：T = 平衡补偿力矩
+// 	//         +转向补偿力矩
+// 	Control_Info->L_Leg_Info.T = (Control_Info->L_Leg_Info.Moment.Balance_T  + Control_Info->L_Leg_Info.Moment.Turn_T) ;
+// 	Control_Info->R_Leg_Info.T = (Control_Info->R_Leg_Info.Moment.Balance_T  + Control_Info->R_Leg_Info.Moment.Turn_T) ;
 
+// 	//简化腿的总转矩
+// 	//公式：Tp =  平衡补偿转矩
+// 	//         + 腿长补偿转矩
+// 	Control_Info->L_Leg_Info.Tp =   Control_Info->L_Leg_Info.Moment.Balance_Tp + Control_Info->L_Leg_Info.Moment.Leg_Coordinate_Tp;
+// 	Control_Info->R_Leg_Info.Tp =   Control_Info->R_Leg_Info.Moment.Balance_Tp + Control_Info->R_Leg_Info.Moment.Leg_Coordinate_Tp;
 	
-	Control_Info->L_Leg_Info.Tp =   Control_Info->L_Leg_Info.Moment.Balance_Tp + Control_Info->L_Leg_Info.Moment.Leg_Coordinate_Tp;
-	Control_Info->R_Leg_Info.Tp =   Control_Info->R_Leg_Info.Moment.Balance_Tp + Control_Info->R_Leg_Info.Moment.Leg_Coordinate_Tp;
-	
-	if(Control_Info->L_Leg_Info.Support.Flag == 1){
+// 	if(Control_Info->L_Leg_Info.Support.Flag == 1){
 	   
-			Control_Info->L_Leg_Info.T = 0;
+// 			Control_Info->L_Leg_Info.T = 0;
 	
-	}
+// 	}
 	
-	if(Control_Info->R_Leg_Info.Support.Flag == 1){
+// 	if(Control_Info->R_Leg_Info.Support.Flag == 1){
 	
-			Control_Info->R_Leg_Info.T = 0;
-	
-	
-	}
+// 			Control_Info->R_Leg_Info.T = 0;
 	
 	
+// 	}
 	
-	if(Control_Info->Chassis_Situation == CHASSIS_WEAK){
+	
+	
+// 	if(Control_Info->Chassis_Situation == CHASSIS_WEAK){
  
-   Control_Info->L_Leg_Info.Tp = 0;
-   Control_Info->R_Leg_Info.Tp = 0;
-	 Control_Info->L_Leg_Info.F = 0;
-   Control_Info->R_Leg_Info.F = 0;	
-	 Control_Info->L_Leg_Info.T = 0;
-   Control_Info->R_Leg_Info.T = 0;	
+//    Control_Info->L_Leg_Info.Tp = 0;
+//    Control_Info->R_Leg_Info.Tp = 0;
+// 	 Control_Info->L_Leg_Info.F = 0;
+//    Control_Info->R_Leg_Info.F = 0;	
+// 	 Control_Info->L_Leg_Info.T = 0;
+//    Control_Info->R_Leg_Info.T = 0;	
  
- }
-	
-	
+//  }
+/*
+测试用：
+1：简化模型参数到实际模型参数转换器
+的测试
+输入遥控器的值，转换到F和Tp
+
+
+*/	
+
+	  Control_Info->L_Leg_Info.Tp = remote_ctrl.rc.ch[2] *0.01f;
+    Control_Info->R_Leg_Info.Tp = remote_ctrl.rc.ch[0] *0.01f;
+ 	  Control_Info->L_Leg_Info.F  = remote_ctrl.rc.ch[3] *0.5f;
+    Control_Info->R_Leg_Info.F  = remote_ctrl.rc.ch[1]  *0.5f;	
 }
 //这个才是串并联腿实际的独特的函数转换框架，
 //整个运控的逻辑是控制机器人运动时把它看成一个二阶独轮车
@@ -1243,9 +1298,11 @@ Control_Info->L_Leg_Info.SendValue.T_Calf = (Control_Info->L_Leg_Info.A * Contro
 Control_Info->L_Leg_Info.SendValue.T_Thigh = (-Control_Info->L_Leg_Info.A * Control_Info->L_Leg_Info.F)/Control_Info->L_Leg_Info.Biased.K + (Control_Info->L_Leg_Info.Tp/2.0f);
 //右腿
 //2号电机，右大腿 对应T2 公式：T2 =（A/K）*F +(Tp/2.0f)
+	//2025年11.12修改：互换
 Control_Info->R_Leg_Info.SendValue.T_Thigh = (Control_Info->R_Leg_Info.A * Control_Info->R_Leg_Info.F)/Control_Info->R_Leg_Info.Biased.K + (Control_Info->R_Leg_Info.Tp/2.0f);
 //3号电机，右小腿 对应T1 公式：T1 =（-A/K）*F + (Tp/2.0f)
 Control_Info->R_Leg_Info.SendValue.T_Calf = (-Control_Info->R_Leg_Info.A * Control_Info->R_Leg_Info.F)/Control_Info->R_Leg_Info.Biased.K + (Control_Info->R_Leg_Info.Tp/2.0f);
+
 
 //五连杆并联结构转换器--------------------------------------------------------------------------------------------------
 // 	 float Phi2_3,Phi0_3,Phi1_2,Phi0_2,Phi3_4;
@@ -1293,9 +1350,9 @@ Control_Info->R_Leg_Info.SendValue.T_Calf = (-Control_Info->R_Leg_Info.A * Contr
 	//  VAL_LIMIT(Control_Info->R_Leg_Info.SendValue.T2,-54.f,54.f);  			
 																		
 	  
-	  VAL_LIMIT(Control_Info->L_Leg_Info.SendValue.T_Calf,-54.f,54.f);
-	  VAL_LIMIT(Control_Info->L_Leg_Info.SendValue.T_Thigh,-54.f,54.f);  
-      VAL_LIMIT(Control_Info->R_Leg_Info.SendValue.T_Thigh,-54.f,54.f);
-	  VAL_LIMIT(Control_Info->R_Leg_Info.SendValue.T_Calf,-54.f,54.f);  			
+	  VAL_LIMIT(Control_Info->L_Leg_Info.SendValue.T_Calf,-7.f,7.f);
+	  VAL_LIMIT(Control_Info->L_Leg_Info.SendValue.T_Thigh,-7.f,7.f);  
+      VAL_LIMIT(Control_Info->R_Leg_Info.SendValue.T_Thigh,-7.f,7.f);
+	  VAL_LIMIT(Control_Info->R_Leg_Info.SendValue.T_Calf,-7.f,7.f);  			
 																				
 }
