@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # RMCOD2026_Infantry_Balance
 
 #### Description
@@ -9,6 +10,12 @@
 #### Description
 偏置并联底盘的运控系统
 >>>>>>> 9c36b1f86db516d339e3c1caa6e46d7266cd4c26
+=======
+# Knight_test3
+
+#### Description
+可平衡的初级版本，表现为颤抖，在前后移动时易失衡
+>>>>>>> 90fea63a15fc7e14fc4a755e0fb9329b48952874
 
 #### Software Architecture
 Software architecture description

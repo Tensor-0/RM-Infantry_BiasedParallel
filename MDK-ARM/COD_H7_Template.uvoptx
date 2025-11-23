@@ -252,6 +252,11 @@
           <WinNumber>2</WinNumber>
           <ItemText>Control_Info.L_Leg_Info</ItemText>
         </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Control_Info.L_Leg_Info.A</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>
