@@ -46,13 +46,17 @@ typedef struct //腿的信息
 		float Fusion_Velocity;		//融合速度
 		float Predict_Velocity;		//预测速度
 		float W_Velocity;//			    角速度
+
+
 		float LQR_K[2][6];//    	LQR控制器增益矩阵
 		float LQR_X[6];//       	LQR状态向量(哈工程建模)-未来计划更新为上交建模
 		float LQR_Output[2][6];//	LQR输出
-    float Gravity_Compensation;//重力补偿？
-		float Thigh_Comp_Angle;		//大腿摆角补偿
-		float Calf_Comp_Angle;		//小腿摆角补偿
-	  float Phi_Comp_Angle;//陀螺仪角度补偿
+
+
+        float Gravity_Compensation;           // 重力补偿
+		float Thigh_Comp_Angle;		          //大腿摆角补偿
+		float Calf_Comp_Angle;		          //小腿摆角补偿
+	    float Phi_Comp_Angle;                 //陀螺仪角度补偿
 		float Link_Gravity_Compensation_Angle;//腿部连杆重心补偿角度（弧度制）
 	
         //中间变量
@@ -81,9 +85,9 @@ typedef struct //腿的信息
 
 				//腿摆角(以水平向右为正方向，逆时针为正，建模时腿部朝上)
 				float Thigh_Angle;			//大腿摆角
-				//float Thigh_Swing_Comp_Angle;		//大腿摆角补偿
+		
 				float Calf_Angle;				//小腿摆角
-				//float Calf_Swing_Comp_Angle;		//小腿摆角补偿
+
 				float Thigh_Angle_Dot;		//大腿摆角速度
 				float Calf_Angle_Dot;			//小腿摆角速度
 				//力矩
@@ -97,72 +101,16 @@ typedef struct //腿的信息
 		float Sip_Leg_Length;							//简化模型腿长（AH）
 		float Sip_Leg_Length_dot;						//简化模型腿长变化率
 		float Last_Sip_Leg_Length;						//上一周期腿长（差分计算）
-		float Target_Sip_Leg_Length;                    //目标 腿长
+		float Target_Leg_Length;                        //遥控指令下目标 腿长
+		
+		float Base_Leg_Length;                          //基础腿长
+		float Roll_Leg_Length;                          //横滚补偿腿长
+		float Total_Leg_Length;                         //总目标腿长
 		//角度
 		float Sip_Leg_Angle;							//简化模型腿摆角(以水平向右为正方向，逆时针为正，建模时腿部朝上)
 		float Sip_Leg_Angle_dot;						//简化模型腿摆角角速度
 
-//   struct//VMC (virtual model control)与五连杆运动学解算
-//   {
-// // //并联腿建模
-// // 	//1，五连杆的机械参数(物理参数，固定不变)
-// // 		float L1,L2,L3,L4,L5;
-// // 	//2，虚拟腿参数（随时间变化）
-// // 		float L0;          		// 当前虚拟腿长度
-// // 		float L0_dot;       	// 腿长变化率
-// // 		float Last_L0;      	// 上一周期腿长（差分计算）
-// // 		float Target_L0;    	// 目标腿长（遥控设定）
-// // 	//3. 关节角度（输入状态）
-// // 		float Phi1,Phi4;// 		大腿关节角度（电机测量）
-// // 	//4. 计算关节角度（运动学解算）		
-// // 		float Phi2, Phi3;     	// 膝关节角度（解算得到）
-// // 		float Phi0;           	// 虚拟腿角度（计算输出）
-// // 		float Last_Phi0;      	// 上一周期虚拟腿角度
-// // 	//5. 角度变化率：
-// // 		float Phi1_dot, Phi4_dot; // 左右腿大腿关节角速度（由关节电机测量得到）
-// // 		float Phi0_dot;           // 虚拟腿旋转角速度（由Phi0差分或通过雅可比计算得到）
-// // 	//6. 几何关系（运动学计算）	
-// // 		float X_D_X_B, Y_D_Y_B;  // BD向量分量
-// // 		float X_B, Y_B;          // B点坐标
-// // 		float X_D, Y_D;          // D点坐标
-// // 		float X_C, Y_C;          // C点（足端）坐标
-// // 	//7. 运动学解算（足端状态）
-// // 		float X_C_dot, Y_C_dot;  // 足端速度
-// // 	//8. 中间计算变量（优化用）
-// // 		float A0, B0, C0;      // 二次方程系数
-// // 		float LBD_2, LBD;       // BD距离平方/实际值
-// // 		float Sqrt_Cache;       // 平方根缓存
 
-
-// //偏置并联腿建模-----------------------------------------------------------------------------------
-
-
-
-// 	//float AD,DC,K;//AD=AE,DC=CE,K=AD/AH=CE/JH;
-// 	//经计算得出的虚拟连杆的长度
-// 	float L_AC,L_AH;//AC,AH长度
-// 	//读取关节电机角度，根据几何关系计算得出的简化模型一阶倒立摆腿长等等
-// 	float L_0,L_0dot,Last_L_0;
-// 	float Target_L_0;//目标腿长
-// 	//关节角度--电机编码器反馈
-// 	float Phi_1,Phi_2;
-// 	//Phi_0,Last_Phi_0；简化模型的腿摆角(弧度制)
-// 	float Phi_0,Last_Phi_0;
-// 	/*中间变量，简化表达用ϕ:Phi/ψ:Psi
-// 	其中：
-// 	ϕ=(θ_1 - θ_2 )/2
-// 	ψ= (θ_1 + θ_2 )/2
-// 	S= sqrt(b^2 - a^2 sin^2(ϕ))
-// 	t=a*cosϕ+S(其实是AC长度的表达式，AC = t,AH与AC有比例关系：AH = AC/K)
-// 	a=AD（给定长度）
-// 	b=DC（给定长度）
-// 	A= (a*t*sinϕ)/S	
-// 	*/
-// 	float Phi,Psi,S,t,a,b,A;
-// //已知	JRM11[2]= {(-A/AK),0.5}
-// //		JRM12[2]= {( A/AK),0.5}
-
-//   }VMC;
 	
 	struct
     {
@@ -317,6 +265,10 @@ typedef struct{
     Chassis_Mode_e Chassis_Mode;			// 底盘运动模式
     Leg_Length_Mode_e  Leg_Length_Mode;		// 腿部长度模式
   	float VDC;								// 电压值
+	//基础低腿长
+	float Base_Leg_Length_Low;
+	//基础高腿长
+	float Base_Leg_Length_High;
 	 //初始化
 	struct
   { 
@@ -422,7 +374,32 @@ struct{
     float Err;     // 误差
 	 }Yaw;
  
-	
+	//横滚控制
+	struct{
+		//1,实际两腿长度之差
+		float Length_Diff;
+		
+		//2,两轮机械间距，单位米
+		float Distance_Two_Wheel;
+		//3,机体因为实际腿长差而产生的横滚角度
+		float Length_Diff_Angle;
+		//4,当前横滚角
+		float Angle;
+		//5,腿长差横滚角的正切值
+		float Tan_Length_Diff_Angle;
+		//6，机体横滚角的正切值
+		float Tan_Angle;
+		//7，机体实际遇上的坡度角度的正切值
+		//值得说明的是，坡度角实际等于机体横滚角加上腿长差横滚角
+		float Tan_Slope_Angle;
+	   //8，为了补偿坡度，而叠加在基础腿长上的横滚补偿腿长
+	   float Slope_Angle_Length;
+	   //9,横滚标志 当机体横滚角超过正负0.1弧度值时，开始横滚控制
+	   bool IF_Roll_Flag;
+		//目标横滚角
+		float Target_Angle;
+		float Offset;   //陀螺仪角度补偿
+	}Roll;//横滚控制
 /*		
 	struct
   {
