@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : ramp.c
+  * @file           : Ramp.c
   * @brief          : ramp functions 
   * @author         : Yan Yuanbin
   * @date           : 2023/04/27
@@ -13,7 +13,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "ramp.h"
+#include "Ramp.h"
 
 /* Private define ------------------------------------------------------------*/
 /**
